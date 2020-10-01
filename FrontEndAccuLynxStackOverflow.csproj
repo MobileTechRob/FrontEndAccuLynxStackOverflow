@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="StacMan, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\StacMan.1.1.2\lib\StacMan.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -154,7 +157,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="StartPage.aspx" />
+    <Content Include="QuestionAndAnswerPage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -203,12 +206,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="StackAppDataClasses\DataClasses.cs" />
-    <Compile Include="StartPage.aspx.cs">
-      <DependentUpon>StartPage.aspx</DependentUpon>
+    <Compile Include="StackAppDataClasses\StackApp_APIClient.cs" />
+    <Compile Include="QuestionAndAnswerPage.aspx.cs">
+      <DependentUpon>QuestionAndAnswerPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StartPage.aspx.designer.cs">
-      <DependentUpon>StartPage.aspx</DependentUpon>
+    <Compile Include="QuestionAndAnswerPage.aspx.designer.cs">
+      <DependentUpon>QuestionAndAnswerPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

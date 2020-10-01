@@ -24,15 +24,6 @@ namespace FrontEndAccuLynxStackOverflow
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnGetQuestions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGetQuestions;
-
-        /// <summary>
         /// StackOverFlowQuestionsListView control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,33 @@ namespace FrontEndAccuLynxStackOverflow
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView StackOverFlowQuestionsListView;
+
+        /// <summary>
+        /// DataPager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager DataPager1;
+
+        /// <summary>
+        /// lblSelectedQuestionsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelectedQuestionsLabel;
+
+        /// <summary>
+        /// lblSelectedQuestions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelectedQuestions;
 
         /// <summary>
         /// StackOverFlowAnswersListView control.
