@@ -206,7 +206,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="StackAppDataClasses\DataClasses.cs" />
-    <Compile Include="StackAppDataClasses\StackApp_APIClient.cs" />
     <Compile Include="QuestionAndAnswerPage.aspx.cs">
       <DependentUpon>QuestionAndAnswerPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

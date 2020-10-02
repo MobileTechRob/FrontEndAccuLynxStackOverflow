@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="QuestionAndAnswerPage.aspx.cs" Inherits="FrontEndAccuLynxStackOverflow.StartPage" %>
+﻿<%@ Page Language="C#" MaintainScrollPositionOnPostback="true" AutoEventWireup="true" CodeBehind="QuestionAndAnswerPage.aspx.cs" Inherits="FrontEndAccuLynxStackOverflow.StartPage" %>
 
 <!DOCTYPE html>
 
@@ -25,8 +25,8 @@
                 </table>
             </LayoutTemplate>
             <ItemTemplate> 
-                <tr id="row" runat="server">
-                        <td align="center" runat="server">
+                <tr id="row" runat="server" style="width:50%;font:200;padding-left:2;padding-right:2;padding-top:2;padding-bottom:2">
+                        <td align="center" runat="server" >
                             <%# Eval("QuestionTitle") %>
                         </td>
                         <td align="center" runat="server">
@@ -39,7 +39,7 @@
                  </tr>
             </ItemTemplate>
         </asp:ListView>
-        <asp:DataPager ID="DataPager1" runat="server" PagedControlID="StackOverFlowQuestionsListView" PageSize="3">
+-        <asp:DataPager ID="DataPager1" runat="server" PagedControlID="StackOverFlowQuestionsListView" PageSize="3" Visible ="false">
             <Fields>
                 <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
                 <asp:NumericPagerField />
@@ -48,14 +48,13 @@
         </asp:DataPager>
         <br />
         <br />
-        <asp:Label ID="lblSelectedQuestionsLabel" Text="Selected Question:" runat="server"></asp:Label>        
+        <asp:Label ID="lblSelectedQuestionsLabel" Text="Selected Question:" runat="server" Visible="false"></asp:Label>        
         <asp:Label ID="lblSelectedQuestions" Text="" runat="server"></asp:Label>        
         <br />
         <asp:ListView ID="StackOverFlowAnswersListView" runat="server">           
             <LayoutTemplate>
                 <table id ="Header" runat="server" border="1">
-                    <tr id="tableheaderrow" title="Header Row" runat="server">
-                        <td id="AnswerTitle" runat="server"><b>Answser Title</b></td>
+                    <tr id="tableheaderrow" title="Header Row" runat="server">                        
                         <td id="AnswerBody" runat="server"><b>Answer Body</b></td>
                     </tr>
                     <tr id="itemPlaceHolder">
@@ -65,10 +64,7 @@
             <ItemTemplate> 
                 <tr id="row" runat="server">
                         <td align="center" runat="server">
-                            <%# Eval("AnswerTitle") %>
-                        </td>
-                        <td align="center" runat="server">
-                            <%# Eval("AnswerBody") %>
+                            <%# Eval("Answer") %>
                         </td>
                         <td id="AnswerIsAccepted"><asp:Button ID="btnIsAcceptedAnswer" Text ="This is the Accepted Answer" runat="server" CommandName="DetermineAcceptedAnswer" CommandArgument='<%# Eval("AcceptedAnswer")%>' OnCommand="btnIsAcceptedAnswer_Command" /></td>
                  </tr>

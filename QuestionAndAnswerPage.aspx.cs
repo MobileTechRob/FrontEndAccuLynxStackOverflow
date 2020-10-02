@@ -13,15 +13,8 @@ namespace FrontEndAccuLynxStackOverflow
 {
     public partial class StartPage : System.Web.UI.Page
     {
-
-        enum CommandArgs
-        {
-            ANSWER_TITLE,
-            QUESTION_ID
-        }
-
         StackExchange.StacMan.StacManClient stackAppClient = new StackExchange.StacMan.StacManClient("IWxKGhjr9yw)JT7GHEQGaA((", "2.1");
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             // first time loading the page so lets retrieve the data from the api
@@ -62,24 +55,23 @@ namespace FrontEndAccuLynxStackOverflow
                 }
 
                 StackOverFlowQuestionsListView.DataSource = tableForQuestionsListview;
-                StackOverFlowQuestionsListView.DataBind();
+                StackOverFlowQuestionsListView.DataBind();                
             }
            
         }
 
-        protected void btnViewAnswers_Command(object sender, CommandEventArgs e)
+        protected async void btnViewAnswers_Command(object sender, CommandEventArgs e)
         {
-            DataTable tableForAnswersListview = new DataTable();
+            lblSelectedQuestionsLabel.Visible = true;
 
-            tableForAnswersListview.Columns.Add("AnswerTitle", System.Type.GetType("System.String"));
-            tableForAnswersListview.Columns.Add("AnswerBody", System.Type.GetType("System.String"));
+            DataTable tableForAnswersListview = new DataTable();
+            
+            tableForAnswersListview.Columns.Add("Answer", System.Type.GetType("System.String"));
             tableForAnswersListview.Columns.Add("AcceptedAnswer", System.Type.GetType("System.String"));
             tableForAnswersListview.Columns.Add("QuestionId", System.Type.GetType("System.String"));
             tableForAnswersListview.Columns.Add("AnswerId", System.Type.GetType("System.String"));
 
             List<Int32> listOfQuestionIds = new List<int>();
-
-            //string[] commandParms = e.CommandArgument.ToString().Split(';');           
             listOfQuestionIds.Add(Int32.Parse(e.CommandArgument.ToString()));
 
             Task<StackExchange.StacMan.StacManResponse<Question>> selectedQuestionTask = stackAppClient.Questions.GetByIds("stackoverflow.com", listOfQuestionIds, "withbody");
@@ -89,27 +81,48 @@ namespace FrontEndAccuLynxStackOverflow
             Task<StackExchange.StacMan.StacManResponse<Answer>> answerstask = stackAppClient.Questions.GetAnswers("stackoverflow.com", listOfQuestionIds, "withbody");
             StackExchange.StacMan.StacManResponse<Answer> listOfAnswerInfo = answerstask.Result;
 
+            Action<StackExchange.StacMan.StacManResponse<Answer>> listAnswersDel = DisplayAnswers;
+
+            listAnswers.Method = "DisplayAnswers";
+
+            answerstask.GetAwaiter().OnCompleted()
+
+
             foreach (Answer answer in listOfAnswerInfo.Data.Items)
             {                   
-                tableForAnswersListview.Rows.Add(new object[] {answer.Title, answer.Body, answer.IsAccepted, answer.AnswerId});
+                tableForAnswersListview.Rows.Add(new object[] {answer.Body, answer.IsAccepted, answer.AnswerId});
             }
 
             StackOverFlowAnswersListView.DataSource = tableForAnswersListview;
             StackOverFlowAnswersListView.DataBind();
         }
 
-        protected void btnGetQuestions_Click(object sender, EventArgs e)
+        public void DisplayAnswers(StackExchange.StacMan.StacManResponse<Answer> answerlist)
         {
-            
+            DataTable tableForAnswersListview = new DataTable();
+
+            tableForAnswersListview.Columns.Add("Answer", System.Type.GetType("System.String"));
+            tableForAnswersListview.Columns.Add("AcceptedAnswer", System.Type.GetType("System.String"));
+            tableForAnswersListview.Columns.Add("QuestionId", System.Type.GetType("System.String"));
+            tableForAnswersListview.Columns.Add("AnswerId", System.Type.GetType("System.String"));
+
+            foreach (Answer answer in answerlist.Data.Items)
+            {
+                tableForAnswersListview.Rows.Add(new object[] { answer.Body, answer.IsAccepted, answer.AnswerId });
+            }
+
+            StackOverFlowAnswersListView.DataSource = tableForAnswersListview;
+            StackOverFlowAnswersListView.DataBind();
         }
 
         protected void btnIsAcceptedAnswer_Command(object sender, CommandEventArgs e)
         {
-            if (e.CommandArgument.ToString().Equals(Boolean.TrueString))
-            {
-                
-            }
+            Button btn = (Button)sender;
 
+            if (e.CommandArgument.ToString().Equals(Boolean.TrueString))                
+                btn.BackColor = System.Drawing.Color.Green;             
+            else
+                btn.BackColor = System.Drawing.Color.Red;
         }
     }
 }
