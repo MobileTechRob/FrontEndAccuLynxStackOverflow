@@ -95,6 +95,8 @@ namespace FrontEndAccuLynxStackOverflow
         /// <param name="e"></param>
         protected void btnViewAnswers_Command(object sender, CommandEventArgs e)
         {
+            StackOverFlowAnswersListView.Visible = true;
+
             lblSelectedQuestionsLabel.Visible = true;
 
             DataTable tableForAnswersListview = new DataTable();
@@ -120,9 +122,7 @@ namespace FrontEndAccuLynxStackOverflow
         }
 
         public void DisplayAnswers(StackExchange.StacMan.StacManResponse<Answer> answerlist)
-        {
-            StackOverFlowAnswersListView.Visible = true;
-
+        {          
             DataTable tableForAnswersListview = new DataTable();
 
             tableForAnswersListview.Columns.Add("Answer", System.Type.GetType("System.String"));
