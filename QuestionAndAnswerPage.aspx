@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MaintainScrollPositionOnPostback="true" AutoEventWireup="true" CodeBehind="QuestionAndAnswerPage.aspx.cs" Inherits="FrontEndAccuLynxStackOverflow.StartPage" %>
+﻿<%@ Page Language="C#" MaintainScrollPositionOnPostback="true"  AutoEventWireup="true" Async="true" CodeBehind="QuestionAndAnswerPage.aspx.cs" Inherits="FrontEndAccuLynxStackOverflow.StartPage" %>
 
 <!DOCTYPE html>
 
@@ -9,14 +9,13 @@
 <body>
     <h3>StackOverFlow Questions and Answers - Demo App for AccuLynx</h3>
     <form id="form1" runat="server">
-        <div>
-        </div>        
+        <div>                
         <br />
         <br />
-        <asp:ListView ID="StackOverFlowQuestionsListView" runat="server">           
-            <LayoutTemplate>
-                <table id ="Header" runat="server" border="1">
-                    <tr id="tableheaderrow" title="Header Row" runat="server" onclick="questionClick">
+        <asp:ListView ID="StackOverFlowQuestionsListView" runat="server" OnPagePropertiesChanging="StackOverFlowQuestionsListView_PagePropertiesChanging">           
+            <LayoutTemplate>               
+                <table id ="Header" runat="server" border="1" >
+                    <tr id="tableheaderrow" title="Header Row" runat="server" onclick="questionClick" >
                         <td id="QuestionTitle" runat="server"><b>Question Title</b></td>
                         <td id="QuestionBody" runat="server"><b>Question Body</b></td>                        
                     </tr>
@@ -25,11 +24,11 @@
                 </table>
             </LayoutTemplate>
             <ItemTemplate> 
-                <tr id="row" runat="server" style="width:50%;font:200;padding-left:2;padding-right:2;padding-top:2;padding-bottom:2">
+                <tr id="row" runat="server" >
                         <td align="center" runat="server" >
                             <%# Eval("QuestionTitle") %>
                         </td>
-                        <td align="center" runat="server">
+                        <td align="center" runat="server" style="font:200">
                             <%# Eval("QuestionBody") %>
                         </td>
                         <td align="center" visible="false" runat="server">
@@ -39,7 +38,7 @@
                  </tr>
             </ItemTemplate>
         </asp:ListView>
--        <asp:DataPager ID="DataPager1" runat="server" PagedControlID="StackOverFlowQuestionsListView" PageSize="3" Visible ="false">
+        <asp:DataPager ID="DataPager1" runat="server" PagedControlID="StackOverFlowQuestionsListView" PageSize="3">
             <Fields>
                 <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
                 <asp:NumericPagerField />
@@ -69,7 +68,8 @@
                         <td id="AnswerIsAccepted"><asp:Button ID="btnIsAcceptedAnswer" Text ="This is the Accepted Answer" runat="server" CommandName="DetermineAcceptedAnswer" CommandArgument='<%# Eval("AcceptedAnswer")%>' OnCommand="btnIsAcceptedAnswer_Command" /></td>
                  </tr>
             </ItemTemplate>
-        </asp:ListView>               
+        </asp:ListView>
+     </div>
     </form>
 </body>
 </html>
