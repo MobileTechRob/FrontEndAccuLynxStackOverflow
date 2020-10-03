@@ -57,6 +57,9 @@ namespace FrontEndAccuLynxStackOverflow
             BindWithListView();
         }
 
+        /// <summary>
+        /// get the data from the questionInfo Task and place it into a DataTable for the list view
+        /// </summary>
         private void BindWithListView()
         {
             DataTable tableForQuestionsListview = new DataTable();
@@ -75,7 +78,11 @@ namespace FrontEndAccuLynxStackOverflow
             StackOverFlowQuestionsListView.DataBind();
         }
 
-
+        /// <summary>
+        /// This will control the paging of information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void StackOverFlowQuestionsListView_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             DataPager dp = (DataPager)FindControl("DataPager1");
@@ -121,6 +128,10 @@ namespace FrontEndAccuLynxStackOverflow
             answerstask.Wait();                      
         }
 
+        /// <summary>
+        /// the logic has returned from the api call so display the answers.
+        /// </summary>
+        /// <param name="answerlist"></param>
         public void DisplayAnswers(StackExchange.StacMan.StacManResponse<Answer> answerlist)
         {          
             DataTable tableForAnswersListview = new DataTable();
@@ -139,6 +150,11 @@ namespace FrontEndAccuLynxStackOverflow
             StackOverFlowAnswersListView.DataBind();
         }
 
+        /// <summary>
+        /// they clicked the yes this is the accepted answer button so now see what command data said.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnIsAcceptedAnswer_Command(object sender, CommandEventArgs e)
         {
             Button btn = (Button)sender;
